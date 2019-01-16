@@ -38,5 +38,6 @@ function dododo(link,n){
 		})
 	},((n+1)*490)+rando)
 }
-
-dododo('food-engineering-mag',1)
+for(i=0; i<pathArr.length; i++){
+	dododo(pathArr[i],i)
+}
