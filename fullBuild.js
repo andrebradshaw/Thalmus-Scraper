@@ -1,5 +1,7 @@
 //test build. must run on https://www.thalamus.co/ad_partners//utility functions
 
+//test build. must run on https://www.thalamus.co/ad_partners//utility functions
+
 function checker(elm, type) {  if (elm != undefined) {    if (type == 'src') {     return elm.getAttribute('src');    }	if (type == 'click') {     elm.click();    }	if (type == 'href') {      return elm.href;    }    if (type == 'text') {      return elm.innerText.trim().replace(/,/g, '');    }    if (type == 'next') {      return elm;    }  } else {    return '';  }}
 function reg(elm, n){if(elm != null){return elm[n];}else{return '';}}
 function unq(arrgh){	return arrgh.filter((elm,pos,arr) =>{	return arr.indexOf(elm) == pos;});}
@@ -59,7 +61,7 @@ function getContacts(link, n) {
         var parser = new DOMParser();
         var doc = parser.parseFromString(html, "text/html");
         var rows = cn(doc, 'item item--no-role');
-	console.log(path, rows.length);
+		console.log(link + ' has ' + rows.length + ' contacts');
         for (r = 0; r < rows.length; r++) {
           var row = parseRow(rows[r], link);
           containArr.push(row);
@@ -113,4 +115,3 @@ for (i = 0; i < pages; i++) {
 var time = Math.ceil(Math.ceil((pages * 5)+78)/60)/60;
 var timeMsg = 'This will take about '+time+' hours to complete';
 console.log(timeMsg);
-
