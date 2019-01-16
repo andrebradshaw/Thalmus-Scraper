@@ -18,18 +18,23 @@ function r(s){return s.replace(/,/g,'')}
 
 var pages = parseInt(checker(tn(cn(document, 'pagination')[0], 'a')[tn(cn(document, 'pagination')[0], 'a').length - 2], 'text'));
 
-function converter(arr){
-  var dl_output = arr.map(itm=>{	return itm.toString().replace(/$/, '\r'); }).toString().replace(/\r,/g, '\r');
-  function dl(filename, text) {
-    var elmi = document.createElement('a');
-    elmi.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
-    elmi.setAttribute('download', filename);
-    elmi.style.display = 'none';
-    document.body.appendChild(elmi);
-    elmi.click();
-    document.body.removeChild(elmi);
-  }
-  dl('thalmus_dl.csv', dl_output);
+function downloadr(dat, filename, type) {
+    var data = dat.map(itm=>{	return itm.toString().replace(/$/, '\r'); }).toString().replace(/\r,/g, '\r');
+    var file = new Blob([data], {type: type});
+    if (window.navigator.msSaveOrOpenBlob) {
+        window.navigator.msSaveOrOpenBlob(file, filename);
+    } else {
+        var a = document.createElement("a"),
+		url = URL.createObjectURL(file);
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        setTimeout(() =>{
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);  
+        }, 10); 
+    }
 }
 
 var containArr = [];
@@ -138,8 +143,8 @@ function getPaths(p) {
       })
 	if(p == (pages-1)){
 		setTimeout(() => {
-			converter(containArr);
-    	}, 115901);
+			downloadr(containArr,'thalmus.csv','data:text/plain;charset=utf-8,');
+    		}, 115901);
   	}
   }, ((p) * 101790) + rando)
 }
