@@ -61,7 +61,7 @@ var rando = Math.round(Math.random() * 100);
         var doc = parser.parseFromString(html, "text/html");
 		var pg = parseInt(checker(tn(cn(doc, 'pagination')[0], 'a')[tn(cn(doc, 'pagination')[0], 'a').length - 2], 'text'));
 		pushcontacts(doc,lnk)
-		for(i=1; i<=pg; i++){
+		for(i=2; i<=pg; i++){
 			getContacts(lnk,i)
 		}
 		})
