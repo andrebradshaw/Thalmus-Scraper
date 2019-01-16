@@ -59,14 +59,13 @@ function getContacts(link, n) {
         var parser = new DOMParser();
         var doc = parser.parseFromString(html, "text/html");
         var rows = cn(doc, 'item item--no-role');
+	console.log(path, rows.length);
         for (r = 0; r < rows.length; r++) {
           var row = parseRow(rows[r], link);
-          console.log(row);
           containArr.push(row);
         }
-
       })
-  }, ((n + 1) * 7010) + rando)
+  }, ((n + 1) * 5010) + rando)
 }
 
 
@@ -102,11 +101,16 @@ function getPaths(p) {
 	if(p == (pages-1)){
 		setTimeout(() => {
 			converter(containArr);
-    	},15901);
+    	}, 77901);
   	}
-  }, ((p + 1) * 105790) + rando)
+  }, ((p + 1) * 77790) + rando)
 }
 
 for (i = 0; i < pages; i++) {
   getPaths(i)
 }
+
+var time = Math.ceil(Math.ceil((pages * 5)+78)/60)/60;
+var timeMsg = 'This will take about '+time+' hours to complete';
+console.log(timeMsg);
+
