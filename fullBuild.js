@@ -70,7 +70,7 @@ var rando = Math.round(Math.random() * 100);
 
 function pushcontacts(obj,lk){
 	var rows = cn(obj, 'item__person');
-	console.log(lk + ' has ' + rows.length + ' contacts');
+	console.log((rows.length-1) + ' contacts  added from ' +lk);
     for (r = 1; r < rows.length; r++) {
     	var row = parseRow(rows[r].parentElement, lk);
     	containArr.push(row);
