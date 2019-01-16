@@ -1,4 +1,4 @@
-//test build. must run on https://www.thalamus.co/ad_partners
+//test build. must run on https://www.thalamus.co/ad_partners//utility functions
 
 function checker(elm, type) {  if (elm != undefined) {    if (type == 'src') {     return elm.getAttribute('src');    }	if (type == 'click') {     elm.click();    }	if (type == 'href') {      return elm.href;    }    if (type == 'text') {      return elm.innerText.trim().replace(/,/g, '');    }    if (type == 'next') {      return elm;    }  } else {    return '';  }}
 function reg(elm, n){if(elm != null){return elm[n];}else{return '';}}
@@ -66,7 +66,7 @@ function getContacts(link, n) {
         }
 
       })
-  }, ((n + 1) * 710) + rando)
+  }, ((n + 1) * 7010) + rando)
 }
 
 
@@ -104,7 +104,7 @@ function getPaths(p) {
 			converter(containArr);
     	},15901);
   	}
-  }, ((p + 1) * 15790) + rando)
+  }, ((p + 1) * 105790) + rando)
 }
 
 for (i = 0; i < pages; i++) {
