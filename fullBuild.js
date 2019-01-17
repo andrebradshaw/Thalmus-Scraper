@@ -11,8 +11,8 @@ function r(s){return s.replace(/,/g,'')}
   var geo = checker(cn(obj, 'item__location')[0], 'text');
   var role = checker(cn(obj, 'item__role')[0], 'text');
   var contact = checker(cn(obj, 'item__info')[0], 'text');
-  var email = reg(/\S+@\S+(?=\n)/.exec(contact), 0);
-  var phone = reg(/(?<=\n\W+)\d+.+/.exec(contact), 0);
+  var email = checker(cn(obj, 'simple-link email')[0], 'text');
+  var phone = reg(/(?<=\n\W{0,3}?)\d+.+/.exec(checker(cn(obj, 'item__info')[0], 'text')), 0);
   return [path, r(geo), r(person), r(role), r(email), r(phone)];
 }
 
