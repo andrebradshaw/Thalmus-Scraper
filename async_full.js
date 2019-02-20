@@ -36,6 +36,7 @@ async function getCompanyIds(p, type){
 	var text = await res.text();
 	var regXgroups = /(?<=ad_partner_)(.+?)\\'.+?href=\\'\/ad_partners\/(.+?)\\.+?item__title\\'>\\n(.+?)\\n/;
 	var ids = text.match( /ad_partner_.+?\\'.+?href=\\'\/ad_partners\/.+?\\.+?item__title\\'>\\n.+?\\n/g);
+	if(ids){
 	ids.forEach(async itm => {
 		var rx = regXgroups.exec(itm);
 		var inArr = containArr.some(elm=> elm == rx[1]);
@@ -47,13 +48,14 @@ async function getCompanyIds(p, type){
 			getContactsByCoId([rx[1], rx[2], rx[3]]);
         }
 	});
+	}
 }
 
 async function looper(str){
 	for(i=0; i<pages; i++){
+		await delay(11781 + Math.round(Math.random() * 100));
 		getCompanyIds(i,str);
 		console.log(i);
-		await delay(13781 + Math.round(Math.random() * 100));
     }
 }
 
@@ -66,8 +68,6 @@ async function getContactsByCoId(arr){
 	var dat = await res.json();
 	console.log(dat);
 	for(i = 0; i < dat.length; i++){
-// 		var csv = [(dat[i].id), (dat[i].name), (dat[i].title), (arr[2]), (dat[i].number), (dat[i].email), (dat[i].location), (dat[i].linkedin), (dat[i].skype), (dat[i].account_id), (dat[i].parent_id), (dat[i].contact_type), (dat[i].contact_type_id), (dat[i].is_hidden), (dat[i].created_at), (dat[i].updated_at), (dat[i].resolved), (dat[i].submitter_id), 'https://www.thalamus.co/ad_partners/'+arr[1], id];
-
 		var csv = [(dat[i].id), xComma(dat[i].name), xComma(dat[i].title), (arr[2]), xComma(dat[i].number), xComma(dat[i].email), xComma(dat[i].location), xComma(dat[i].linkedin), xComma(dat[i].skype), (dat[i].account_id), (dat[i].parent_id), (dat[i].contact_type), (dat[i].contact_type_id), (dat[i].is_hidden), (dat[i].created_at), (dat[i].updated_at), (dat[i].resolved), (dat[i].submitter_id), 'https://www.thalamus.co/ad_partners/'+arr[1], id];
 		contactArr.push(csv);
 	}
