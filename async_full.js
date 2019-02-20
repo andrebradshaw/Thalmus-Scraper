@@ -10,7 +10,7 @@ var gi = (ob, nm) => ob.getElementById(nm);
 
 var delay = (ms) => new Promise(res => setTimeout(res, ms));
 
-var xComma = (str) => str ? str.toString().replace(/,/g, ';') : ' ';
+var xComma = (str) => str ? str.toString().replace(/\n/g, '').replace(/\r/g, '').replace(/"/g, '').replace(/,/g, ';').replace(/\+/g, '') : ' ';
 
 var pages = parseInt(checker(tn(cn(document, 'pagination')[0], 'a')[tn(cn(document, 'pagination')[0], 'a').length - 2], 'text'));
 console.log(pages);
@@ -19,7 +19,7 @@ var containArr = [];
 var contactArr = [];
 
 async function getCompanyIds(p, type) {
-  var res = await fetch("https://www.thalamus.co/" + type + "?page=" + (p + 1), {
+  var res = await fetch("https://www.thalamus.co/" + type + "?utf8=%E2%9C%93&country=&channel%5B%5D=Connected+TV&channel%5B%5D=Linear+TV&page=" + (p + 1), {
     "credentials": "include",
     "headers": {
       "accept": "*/*;q=0.5, text/javascript, application/javascript, application/ecmascript, application/x-ecmascript",
@@ -74,7 +74,7 @@ async function getContactsByCoId(arr) {
   var dat = await res.json();
   if (dat) {
     for (let i = 0; i < dat.length; i++) {
-      var csv = [(dat[i].id), xComma(dat[i].name), xComma(dat[i].title), (arr[2]), xComma(dat[i].number), xComma(dat[i].email), xComma(dat[i].location), xComma(dat[i].linkedin), xComma(dat[i].skype), (dat[i].account_id), (dat[i].parent_id), (dat[i].contact_type), (dat[i].contact_type_id), (dat[i].is_hidden), (dat[i].created_at), (dat[i].updated_at), (dat[i].resolved), (dat[i].submitter_id), 'https://www.thalamus.co/ad_partners/' + arr[1], id];
+      var csv = [xComma(dat[i].id), xComma(dat[i].name), xComma(dat[i].title), xComma(arr[2]), xComma(dat[i].number), xComma(dat[i].email), xComma(dat[i].location), xComma(dat[i].linkedin), xComma(dat[i].skype), xComma(dat[i].account_id), xComma(dat[i].parent_id), xComma(dat[i].contact_type), xComma(dat[i].contact_type_id), xComma(dat[i].created_at), xComma(dat[i].updated_at), xComma(dat[i].submitter_id), 'https://www.thalamus.co/ad_partners/' + arr[1], id];
       contactArr.push(csv);
     }
   } else {
